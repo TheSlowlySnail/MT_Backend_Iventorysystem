@@ -30,3 +30,41 @@ Route::delete('/item/{barcode}', [
         'uses' => 'QuoteController@deleteItem'
     ]
 );
+
+//Persons
+Route::post('/person', [
+    'uses' => 'QuoteController@postPerson'
+]);
+
+Route::get('/persons',[
+    'uses' => 'QuoteController@getPersons'
+]);
+
+//Update Command
+Route::put('/item/{personid}', [
+    'uses' => 'QuoteController@putPerson'
+]);
+
+Route::delete('/item/{personid}', [
+        'uses' => 'QuoteController@deletePerson'
+    ]
+);
+
+//Lendings
+Route::post('/lend', [
+    'uses' => 'QuoteController@postLend'
+]);
+
+Route::get('/lends',[
+    'uses' => 'QuoteController@getLends'
+]);
+
+//Update Command
+Route::put('/lend/{id}', [
+    'uses' => 'QuoteController@putLend'
+]);
+
+Route::delete('/lend/{id}', [
+        'uses' => 'QuoteController@deleteLend'
+    ]
+);
