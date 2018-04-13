@@ -32,10 +32,10 @@ class CreateItemTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('items',function ($table){
-            $table->foreign('lend')->references('id')->on('lending');
-
-        });
+//        Schema::table('items',function ($table){
+//            $table->foreign('lend')->references('id')->on('lending');
+//
+//        });
 
     }
 
