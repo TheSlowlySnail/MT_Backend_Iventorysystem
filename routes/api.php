@@ -14,57 +14,57 @@ use Illuminate\Http\Request;
 */
 
 Route::post('/item', [
-    'uses' => 'QuoteController@postItem'
+    'uses' => 'InventarController@postItem'
 ]);
 
 Route::get('/items',[
-    'uses' => 'QuoteController@getItems'
+    'uses' => 'InventarController@getItems'
 ]);
 
 //Update Command
 Route::put('/item/{barcode}', [
-    'uses' => 'QuoteController@putItem'
+    'uses' => 'InventarController@putItem'
 ]);
 
 Route::delete('/item/{barcode}', [
-        'uses' => 'QuoteController@deleteItem'
+        'uses' => 'InventarController@deleteItem'
     ]
 );
 
 //Persons
 Route::post('/person', [
-    'uses' => 'QuoteController@postPerson'
+    'uses' => 'PersonsController@postPerson'
 ]);
 
 Route::get('/persons',[
-    'uses' => 'QuoteController@getPersons'
+    'uses' => 'PersonsController@getPersons'
 ]);
 
 //Update Command
 Route::put('/item/{personid}', [
-    'uses' => 'QuoteController@putPerson'
+    'uses' => 'PersonsController@putPerson'
 ]);
 
 Route::delete('/item/{personid}', [
-        'uses' => 'QuoteController@deletePerson'
+        'uses' => 'PersonsController@deletePerson'
     ]
 );
 
 //Lendings
 Route::post('/lend', [
-    'uses' => 'QuoteController@postLend'
+    'uses' => 'LendingController@postLend'
 ]);
 
 Route::get('/lends',[
-    'uses' => 'QuoteController@getLends'
+    'uses' => 'LendingController@getLends'
 ]);
 
 //Update Command
 Route::put('/lend/{id}', [
-    'uses' => 'QuoteController@putLend'
+    'uses' => 'LendingController@putLend'
 ]);
 
 Route::delete('/lend/{id}', [
-        'uses' => 'QuoteController@deleteLend'
+        'uses' => 'LendingController@deleteLend'
     ]
 );

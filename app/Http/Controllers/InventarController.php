@@ -17,11 +17,11 @@ class InventarController extends Controller
         $item->room = $request->input('room');
         $item->status = $request->input('status');
         $item->annotation = $request->input('annotation');
-        $item->img = $request->input('img');
+        $item->image = $request->input('image');
         $item->lend = $request->input('lend');
         $item->manufactor = $request->input('manufactor');
         $item->save();
-        return response()->json(['qutoe' => $item], 201);
+        return response()->json(['item' => $item], 201);
 
     }
 
@@ -45,7 +45,7 @@ class InventarController extends Controller
         $item->room = $request->input('room');
         $item->status = $request->input('status');
         $item->annotation = $request->input('annotation');
-        $item->img = $request->input('img');
+        $item->image = $request->input('image');
         $item->lend = $request->input('lend');
         $item->manufactor = $request->input('manufactor');
         $item->save();

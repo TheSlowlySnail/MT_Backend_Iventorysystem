@@ -14,7 +14,7 @@ class PersonsController extends Controller
         $person->personid = $request->input('personid');
         $person->firstname = $request->input('firstname');
         $person->lastname = $request->input('lastname');
-        $person->annotion = $request->input('anotation');
+        $person->annotation = $request->input('annotation');
         $person->email = $request->input('email');
 
 
@@ -39,7 +39,7 @@ class PersonsController extends Controller
         }
         $person->firstname = $request->input('firstname');
         $person->lastname = $request->input('lastname');
-        $person->annotion = $request->input('anotation');
+        $person->annotation = $request->input('annotation');
         $person->email = $request->input('email');
         $person->save();
         return response()->json(['person' => $person], 200);

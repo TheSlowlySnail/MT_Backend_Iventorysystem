@@ -14,20 +14,29 @@ class CreateItemTable extends Migration
     public function up()
     {
         Schema::create('items', function (Blueprint $table) {
+            $table->string('barcode');
             $table->primary('barcode');
+
             $table->string('name');
             $table->string('description')->nullable();
+            $table->string('type')->nullable();
             $table->string('room')->nullable();
             $table->string('status')->nullable();
             $table->string('annotation')->nullable();
             $table->string('image')->nullable();
-            $table->foreign('lend')->references('id')->on('lending')->nullable();
+            $table->integer('lend')->unsigned()->nullable();
             $table->string('manufactor')->nullable();
 
 
 
             $table->timestamps();
         });
+
+        Schema::table('items',function ($table){
+            $table->foreign('lend')->references('id')->on('lending');
+
+        });
+
     }
 
     /**

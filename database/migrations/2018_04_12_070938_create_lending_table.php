@@ -14,14 +14,21 @@ class CreateLendingTable extends Migration
     public function up()
     {
         Schema::create('lending', function (Blueprint $table) {
-            $table->increments('id');
-            $table->foreign('barcode')->references('barcode')->on('items');
+            $table->increments('id')->unsigned();
 
-            //todo create reference personid
-            $table->foreign('personid');
+
+            $table->integer('personid')->unsigned();
+            $table->string('barcode');
+
             $table->dateTime('startdate');
             $table->dateTime('enddate');
             $table->timestamps();
+        });
+
+        Schema::table('lending',function ($table){
+            $table->foreign('barcode')->references('barcode')->on('items');
+            $table->foreign('personid')->references('personid')->on('persons');
+
         });
     }
 
