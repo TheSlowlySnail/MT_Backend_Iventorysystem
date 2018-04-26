@@ -21,14 +21,14 @@ class InventarController extends Controller
         $item->lend = $request->input('lend');
         $item->manufactor = $request->input('manufactor');
         $item->save();
-        return response()->json(['item' => $item], 201);
+        return response()->json($item, 201);
 
     }
 
     public function getItems(){
         $items = Item::all();
         $response = [
-            'items' => $items
+             'items' => $items
         ];
         return response()->json($response,200);
     }

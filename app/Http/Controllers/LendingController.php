@@ -17,7 +17,7 @@ class LendingController extends Controller
         $lend->enddate = $request->input('enddate');
 
         $lend->save();
-        return response()->json(['qutoe' => $lend], 201);
+        return response()->json(['quote' => $lend], 201);
 
     }
 

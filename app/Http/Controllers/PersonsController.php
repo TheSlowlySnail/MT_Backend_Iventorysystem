@@ -19,7 +19,7 @@ class PersonsController extends Controller
 
 
         $person->save();
-        return response()->json(['qutoe' => $person], 201);
+        return response()->json(['quote' => $person], 201);
 
     }
 
