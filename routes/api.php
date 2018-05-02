@@ -68,3 +68,9 @@ Route::delete('/lend/{id}', [
         'uses' => 'LendingController@deleteLend'
     ]
 );
+
+//Store Image
+
+Route::post('/store', [
+    'uses' => 'uploadController@store'
+]);
