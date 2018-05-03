@@ -10,7 +10,7 @@ class uploadController extends Controller
         //
         $image = $request->file('image');
         $destinationPath = public_path('/images');
-        $image->move($destinationPath);
+        $image->move($destinationPath,$image->getClientOriginalName());
         //return $request->file('image')->move(public_path('images'));
 
     }
