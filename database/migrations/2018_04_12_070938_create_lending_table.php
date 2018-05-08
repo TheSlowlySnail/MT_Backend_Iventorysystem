@@ -25,11 +25,11 @@ class CreateLendingTable extends Migration
             $table->timestamps();
         });
 
-//        Schema::table('lending',function ($table){
-//            $table->foreign('barcode')->references('barcode')->on('items');
-//            $table->foreign('personid')->references('personid')->on('persons');
-//
-//        });
+////        Schema::table('lending',function ($table){
+////            $table->foreign('barcode')->references('barcode')->on('items');
+////            $table->foreign('personid')->references('personid')->on('persons');
+////
+////        });
     }
 
     /**
