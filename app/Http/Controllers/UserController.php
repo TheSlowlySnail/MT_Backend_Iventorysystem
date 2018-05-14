@@ -43,6 +43,7 @@ class UserController extends Controller
         ]);
 
         if ($validator->fails()) {
+            echo 'HALLO Helge hier FAIL';
             return response()->json(['error'=>$validator->errors()], 401);
         }
 
