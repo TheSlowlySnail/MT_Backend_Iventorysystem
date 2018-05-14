@@ -74,3 +74,9 @@ Route::delete('/lend/{id}', [
 Route::post('/store', [
     'uses' => 'uploadController@store'
 ]);
+
+Route::post('userLogin', 'UserController@userLogin');
+Route::post('userRegister', 'UserController@userRegister');
+Route::group(['middleware' => 'auth:api'], function(){
+    Route::get('userDetails', 'UserController@userDetails');
+});
