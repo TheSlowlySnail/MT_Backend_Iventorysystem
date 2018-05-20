@@ -20,13 +20,13 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('role');
 
-            $table->integer('personid');
-            $table->unique('personid');
-
-            $table->string('firstname');
-            $table->string('lastname');
-
-            $table->string('annotation')->nullable();
+//            $table->integer('personid');
+//            $table->unique('personid');
+//
+//            $table->string('firstname');
+//            $table->string('lastname');
+//
+//            $table->string('annotation')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

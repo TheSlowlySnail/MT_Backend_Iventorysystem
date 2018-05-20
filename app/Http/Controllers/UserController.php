@@ -40,6 +40,7 @@ class UserController extends Controller
             'email' => 'required|email',
             'password' => 'required',
             'c_password' => 'required|same:password',
+            'role' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -49,6 +50,7 @@ class UserController extends Controller
 
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
+        //$input = $input['role'];
         $user = User::create($input);
         $success['token'] =  $user->createToken('MyApp')->accessToken;
         $success['name'] =  $user->name;
@@ -60,5 +62,51 @@ class UserController extends Controller
     {
         $users = User::get();
         return response()->json(['success' => $users], 200);
+    }
+
+    public function postUser(Request $request)
+    {
+        $user = new User();
+
+        $user->personid = $request->input('personid');
+        $user->firstname = $request->input('firstname');
+        $user->lastname = $request->input('lastname');
+        $user->annotation = $request->input('annotation');
+        $user->email = $request->input('email');
+        $user->role = $request->input('role');
+
+
+        $user->save();
+        return response()->json(['quote' => $user], 201);
+
+    }
+
+    public function getUsers(){
+        $persons = User::all();
+        $response = [
+            'persons' => $persons
+        ];
+        return response()->json($response,200);
+    }
+
+    public function putUser(Request $request, $id){
+        $user = User::find($id);
+        if(!$user){
+            return response()->json(['message'=>'Document not found'], 400);
+
+        }
+        $user->firstname = $request->input('firstname');
+        $user->lastname = $request->input('lastname');
+        $user->annotation = $request->input('annotation');
+        $user->email = $request->input('email');
+        $user->save();
+        return response()->json(['user' => $user], 200);
+    }
+
+    public function deletePerson($id){
+        $user = User::find($id);
+        $user->delete();
+        return response()->json(['message' => 'Person Deleted'],200);
+
     }
 }

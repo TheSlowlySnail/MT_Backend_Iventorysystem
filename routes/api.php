@@ -31,22 +31,22 @@ Route::delete('/item/{barcode}', [
     ]
 );
 
-//Persons
-Route::post('/person', [
-    'uses' => 'PersonsController@postPerson'
-]);
+//User
+//Route::post('/person', [
+//    'uses' => 'PersonsController@postPerson'
+//]);
 
-Route::get('/persons',[
-    'uses' => 'PersonsController@getPersons'
+Route::get('/users',[
+    'uses' => 'UserController@userDetails'
 ]);
 
 //Update Command
-Route::put('/item/{personid}', [
-    'uses' => 'PersonsController@putPerson'
+Route::put('/user/{id}', [
+    'uses' => 'UserController@putUser'
 ]);
 
-Route::delete('/item/{personid}', [
-        'uses' => 'PersonsController@deletePerson'
+Route::delete('/user/{id}', [
+        'uses' => 'UserController@deletePerson'
     ]
 );
 
