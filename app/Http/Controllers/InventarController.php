@@ -33,10 +33,10 @@ class InventarController extends Controller
         return response()->json($response,200);
     }
 
-    public function putItem(Request $request, $barcode){
-        $item = Item::find("IN SH " . $barcode);
+    public function putItem(Request $request, $id){
+        $item = Item::find($id);
         if(!$item){
-            return response()->json(['message'=>'Document not found Barcode: '.$barcode], 400);
+            return response()->json(['message'=>'Document not found Barcode: '. $id . '. The number is not the Barcode. Look into the Table'], 400);
 
         }
         $item->name = $request->input('name');
@@ -52,8 +52,8 @@ class InventarController extends Controller
         return response()->json(['item' => $item], 200);
     }
 
-    public function deleteItem($item){
-        $item = Item::find("IN SH " . $item);
+    public function deleteItem($id){
+        $item = Item::find($id);
         $item->delete();
         return response()->json(['message' => 'Deleted'],200);
 

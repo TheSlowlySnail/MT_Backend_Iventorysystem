@@ -25,6 +25,7 @@ class UserController extends Controller
 
         if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
             $user = Auth::user();
+
             $success['token'] =  $user->createToken('MyApp')->accessToken;
             return response()->json(['success' => $success], 200);
         }
@@ -38,9 +39,11 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email',
+            'role' => 'required',
+            'firstname' => 'required',
+            'lastname' => 'required',
             'password' => 'required',
-            'c_password' => 'required|same:password',
-            'role' => 'required'
+            'c_password' => 'same:password',
         ]);
 
         if ($validator->fails()) {
@@ -60,8 +63,8 @@ class UserController extends Controller
 
     public function userDetails()
     {
-        $users = User::get();
-        return response()->json(['success' => $users], 200);
+        $user = Auth::user();
+        return response()->json(['success' => $user], 200);
     }
 
     public function postUser(Request $request)
@@ -89,16 +92,25 @@ class UserController extends Controller
         return response()->json($response,200);
     }
 
+    public function getByIdUsers($id){
+        $persons = User::find($id);
+        $response = [
+            'persons' => $persons
+        ];
+        return response()->json($response,200);
+    }
+
     public function putUser(Request $request, $id){
         $user = User::find($id);
         if(!$user){
-            return response()->json(['message'=>'Document not found'], 400);
+            return response()->json(['message'=>'Document not found'], 404);
 
         }
         $user->firstname = $request->input('firstname');
         $user->lastname = $request->input('lastname');
         $user->annotation = $request->input('annotation');
         $user->email = $request->input('email');
+        $user->password =bcrypt( $request->input('password'));
         $user->save();
         return response()->json(['user' => $user], 200);
     }
@@ -106,7 +118,7 @@ class UserController extends Controller
     public function deletePerson($id){
         $user = User::find($id);
         $user->delete();
-        return response()->json(['message' => 'Person Deleted'],200);
+        return response()->json(['message' => 'User Deleted'],200);
 
     }
 }

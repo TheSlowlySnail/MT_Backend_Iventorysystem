@@ -40,6 +40,10 @@ Route::get('/users',[
     'uses' => 'UserController@userDetails'
 ]);
 
+Route::get('/user/{id}', [
+    'uses' => 'UserController@getByIdUsers'
+]);
+
 //Update Command
 Route::put('/user/{id}', [
     'uses' => 'UserController@putUser'
@@ -78,5 +82,5 @@ Route::post('/store', [
 Route::post('userLogin', 'UserController@userLogin');
 Route::post('userRegister', 'UserController@userRegister');
 Route::group(['middleware' => 'auth:api'], function(){
-    Route::get('userDetails', 'UserController@userDetails');
+    Route::post('userDetails', 'UserController@userDetails');
 });
