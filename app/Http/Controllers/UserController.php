@@ -106,6 +106,7 @@ class UserController extends Controller
             return response()->json(['message'=>'Document not found'], 404);
 
         }
+        $user->firstname = $request->input('personid');
         $user->firstname = $request->input('firstname');
         $user->lastname = $request->input('lastname');
         $user->annotation = $request->input('annotation');
