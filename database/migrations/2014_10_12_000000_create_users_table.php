@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('firstname');
             $table->string('lastname');
 
-            $table->text('annotation');
+            //$table->text('annotation');
 
 
             $table->string('password');
