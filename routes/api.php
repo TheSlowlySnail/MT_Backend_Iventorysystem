@@ -22,11 +22,11 @@ Route::get('/items',[
 ]);
 
 //Update Command
-Route::put('/item/{barcode}', [
+Route::put('/item/{id}', [
     'uses' => 'InventarController@putItem'
 ]);
 
-Route::delete('/item/{barcode}', [
+Route::delete('/item/{id}', [
         'uses' => 'InventarController@deleteItem'
     ]
 );
@@ -37,7 +37,7 @@ Route::delete('/item/{barcode}', [
 //]);
 
 Route::get('/users',[
-    'uses' => 'UserController@userDetails'
+    'uses' => 'UserController@getUsers'
 ]);
 
 Route::get('/user/{id}', [
