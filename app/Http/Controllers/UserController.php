@@ -37,7 +37,7 @@ class UserController extends Controller
     public function userRegister(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
+
             'email' => 'required|email',
             'role' => 'required',
             'firstname' => 'required',
@@ -56,7 +56,7 @@ class UserController extends Controller
         //$input = $input['role'];
         $user = User::create($input);
         $success['token'] =  $user->createToken('MyApp')->accessToken;
-        $success['name'] =  $user->name;
+
         return response()->json(['success'=>$success], 200);
     }
 
@@ -64,7 +64,7 @@ class UserController extends Controller
     public function userDetails()
     {
         $user = Auth::user();
-        return response()->json(['success' => $user], 200);
+        return response()->json(['persons' => $user], 200);
     }
 
     public function postUser(Request $request)

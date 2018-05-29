@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class InventarController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function postItem(Request $request)
     {
         $item = new Item();
