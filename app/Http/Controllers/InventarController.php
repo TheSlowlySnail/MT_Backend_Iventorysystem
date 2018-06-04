@@ -63,5 +63,21 @@ class InventarController extends Controller
 
     }
 
+    public function getItem($id){
+        $item = Item::find($id);
+        if(!$item){
+            return response()->json(['message'=>'Document not found ID: '. $id . '. The number is not the Barcode. Look into the Table'], 400);
+
+        }
+
+        $response = [
+            'items' => $item
+        ];
+
+        return response()->json($response,200);
+
+
+    }
+
 
 }

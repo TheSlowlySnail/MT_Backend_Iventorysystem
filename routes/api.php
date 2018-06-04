@@ -31,6 +31,11 @@ Route::delete('/item/{id}', [
     ]
 );
 
+Route::get('/item/{id}', [
+        'uses' => 'InventarController@getItem'
+    ]
+);
+
 //User
 //Route::post('/person', [
 //    'uses' => 'PersonsController@postPerson'
