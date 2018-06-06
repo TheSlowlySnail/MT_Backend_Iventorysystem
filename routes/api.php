@@ -89,3 +89,5 @@ Route::post('userRegister', 'UserController@userRegister');
 Route::group(['middleware' => 'auth:api'], function(){
     Route::post('userDetails', 'UserController@userDetails');
 });
+
+Route::get('/test', 'ExcelController@insertItemsInDatabase');
