@@ -91,10 +91,10 @@ class ExcelController extends Controller
 
 
                 if($row['G'] == 'verbaut'){
-                    $type = 'installed';
+                    $status = 'installed';
                 }
                 elseif ($row['G'] =='verpackt'){
-                    $type = "packeged";
+                    $status = "packeged";
                 }
 
 
