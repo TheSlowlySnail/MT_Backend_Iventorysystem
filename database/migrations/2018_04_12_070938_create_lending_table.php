@@ -18,7 +18,8 @@ class CreateLendingTable extends Migration
 
 
             $table->integer('personid')->unsigned();
-            $table->string('barcode');
+            $table->string('itemid');
+            $table->string('annotation');
 
             $table->dateTime('startdate');
             $table->dateTime('enddate');

@@ -13,6 +13,7 @@ class LendingController extends Controller
         $lend = new Lend();
         $lend->barcode = $request->input('barcode');
         $lend->personid = $request->input('personid');
+        $lend->personid = $request->input('annotation');
         $lend->startdate = $request->input('startdate');
         $lend->enddate = $request->input('enddate');
 
