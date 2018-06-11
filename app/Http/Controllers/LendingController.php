@@ -11,7 +11,7 @@ class LendingController extends Controller
     public function postLend(Request $request)
     {
         $lend = new Lend();
-        $lend->barcode = $request->input('barcode');
+        $lend->itemid = $request->input('itemid');
         $lend->personid = $request->input('personid');
         $lend->personid = $request->input('annotation');
         $lend->startdate = $request->input('startdate');

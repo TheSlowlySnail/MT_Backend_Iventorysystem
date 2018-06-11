@@ -21,6 +21,7 @@ class CreateLendingTable extends Migration
             $table->string('itemid');
             $table->string('annotation');
 
+
             $table->dateTime('startdate');
             $table->dateTime('enddate');
             $table->timestamps();
