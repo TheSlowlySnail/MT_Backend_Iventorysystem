@@ -18,3 +18,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/datetest', function (){
+   $date = new \Carbon\Carbon("Wed Jun 13 2018 00:00:00 GMT+0200");
+   dd($date);
+
+});
