@@ -77,6 +77,11 @@ Route::delete('/lend/{id}', [
         'uses' => 'LendingController@deleteLend'
     ]
 );
+//http://127.0.0.1:8000/api/pidlends?pid=123
+Route::get('/pidlends', [
+    'uses' => 'LendingController@getLendsPerPersonId'
+]
+);
 
 //Store Image
 

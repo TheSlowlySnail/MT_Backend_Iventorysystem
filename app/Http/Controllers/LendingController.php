@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Lend;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Validator;
 
 class LendingController extends Controller
@@ -78,7 +79,8 @@ $lend->enddate->addHours(3);
     }
 
     public function getLendsPerPersonId(){
-        
+        $lends = DB::table('lending')->where('personid', '=', request()->pid)->get();
+        return response()->json($lends, 200);
     }
     //
 }
