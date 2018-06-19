@@ -51,7 +51,9 @@ $lend->enddate->addHours(3);
     }
 
     public function getLends(){
-        $lends = Lend::all();
+        $lends = DB::table('lending')->join('items', 'lending.itemid', '=', 'items.id' )
+            ->join('users','lending.personid', '=' ,'users.personid')
+            ->select('lending.*', 'items.barcode', 'items.name','users.firstname', 'users.lastname')->get();
         $response = [
             'lends' => $lends
         ];
@@ -79,7 +81,9 @@ $lend->enddate->addHours(3);
     }
 
     public function getLendsPerPersonId(){
-        $lends = DB::table('lending')->where('personid', '=', request()->pid)->get();
+//        $lends = DB::table('lending')->where('personid', '=', request()->pid)->get();
+        $lends = DB::table('lending')->join('items', 'lending.itemid', '=', 'items.id' )
+            ->select('lending.*', 'items.barcode', 'items.name')->where('personid', '=', request()->pid)->get();
         return response()->json($lends, 200);
     }
     //
