@@ -22,6 +22,7 @@ class ExcelController extends Controller
         $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
 
         foreach ($sheetData as $row){
+
             $name ="";
             $barcode ="";
             $description ="";
@@ -42,16 +43,57 @@ class ExcelController extends Controller
                 $description = $row['C'];
 
 
+                switch ($row['D']){
+                    case 'Living / Media':
+                        $room = 'multimedia';
+                        break;
+                    case 'Küche':
+                        $room = "kitchen";
+                        break;
+                    case  'Bad':
+                        $room = "bath";
+                        break;
+                    default:
+                        $room = $row['D'];
+                        break;
+                }
 
-                if($row['D'] == 'Living / Media'){
-                    $room = 'multimedia';
-                }
-                elseif ($row['D'] =='Küche'){
-                    $room = "kitchen";
-                }
-                elseif ($row['D'] =='Bad'){
-                    $room = "bath";
-                }
+
+//                switch ($row['F']){
+//                    case 'Zubehör':
+//                        $type = 'equipment';
+//                        break;
+//                    case 'Lautsprecher':
+//                        $type = "speaker";
+//                        break;
+//                    case  'Bedienelement':
+//                        $type = "operating element";
+//                        break;
+//                    case  'Gerät':
+//                        $type = "device";
+//                        break;
+//                    case  'Leuchtmittel':
+//                        $type = "bulb";
+//                        break;
+//                    case  'Mikrofon':
+//                        $type = "microphone";
+//                        break;
+//                    case  'Sensor':
+//                        $type = "sensor";
+//                        break;
+//                    case  'Kamera':
+//                        $type = "camera";
+//                        break;
+//                    case  'Steckdose':
+//                        $type = "socket";
+//                        break;
+//                    case  'Buch':
+//                        $type = "book";
+//                        break;
+//                    default:
+//                        $type = $row['F'];
+//                        break;
+//                }
 
 
                 if($row['F'] == 'Zubehör'){
@@ -83,6 +125,9 @@ class ExcelController extends Controller
                 }
                 elseif ($row['F'] =='Buch'){
                     $type = "book";
+                }
+                else {
+                    $type = $row['F'];
                 }
 
 
