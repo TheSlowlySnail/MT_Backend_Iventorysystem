@@ -8,18 +8,43 @@ use App\Item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Reader\IReadFilter;
 
-
+class MyReadFilter implements IReadFilter
+{
+    public function readCell($column, $row, $worksheetName = '')
+    {
+        // Read title row and rows 20 - 30
+        if (($row >= 1 && $row <= 1000)) {
+            if (in_array($column,range('A','G'))) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
 
 class ExcelController extends Controller
 {
     //
     public function insertItemsInDatabase()
     {
-        $inputFileName = public_path() . '\barcode.xls';
+        $inputFileName = public_path() . '\barcode.xlsx';
+        $inputFileType = IOFactory::identify($inputFileName);
 
-        $spreadsheet = IOFactory::load($inputFileName);
+        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+
+
+        //
+        //
+        $reader->setReadFilter(new MyReadFilter());
+
+
+        $spreadsheet = $reader->load($inputFileName);
+
+        //$spreadsheet = IOFactory::load($inputFileName);
         $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
+
 
         foreach ($sheetData as $row){
 
@@ -35,6 +60,9 @@ class ExcelController extends Controller
             $manufactor ="";
 
                 $name = $row['A'];
+                if($name == 'Artikel'){
+                    continue;
+                }
 
 
                 $barcode = $row['B'];
@@ -143,10 +171,18 @@ class ExcelController extends Controller
                 }
 
 
-            DB::table('items')->insert(
-                ['barcode'=> $barcode, 'name' => $name, 'description' => $description,
-                    'type' => $type, 'room' => $room, 'status' => $status]
-            );
+            if (DB::table('items')->where('barcode', '=', $barcode)->count() > 0) {
+                continue;
+
+            }
+            else{
+                DB::table('items')->insert(
+                    ['barcode'=> $barcode, 'name' => $name, 'description' => $description,
+                        'type' => $type, 'room' => $room, 'status' => $status]
+                );
+            }
+
+
 
         }
 
