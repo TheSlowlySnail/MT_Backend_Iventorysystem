@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Reader\IReadFilter;
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 class MyReadFilter implements IReadFilter
 {
     public function readCell($column, $row, $worksheetName = '')
@@ -87,41 +90,6 @@ class ExcelController extends Controller
                 }
 
 
-//                switch ($row['F']){
-//                    case 'Zubehör':
-//                        $type = 'equipment';
-//                        break;
-//                    case 'Lautsprecher':
-//                        $type = "speaker";
-//                        break;
-//                    case  'Bedienelement':
-//                        $type = "operating element";
-//                        break;
-//                    case  'Gerät':
-//                        $type = "device";
-//                        break;
-//                    case  'Leuchtmittel':
-//                        $type = "bulb";
-//                        break;
-//                    case  'Mikrofon':
-//                        $type = "microphone";
-//                        break;
-//                    case  'Sensor':
-//                        $type = "sensor";
-//                        break;
-//                    case  'Kamera':
-//                        $type = "camera";
-//                        break;
-//                    case  'Steckdose':
-//                        $type = "socket";
-//                        break;
-//                    case  'Buch':
-//                        $type = "book";
-//                        break;
-//                    default:
-//                        $type = $row['F'];
-//                        break;
-//                }
 
 
                 if($row['F'] == 'Zubehör'){
@@ -187,6 +155,44 @@ class ExcelController extends Controller
         }
 
         return response()->json($sheetData, 200);
+
+    }
+
+    public function exportItemsInXml(){
+
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setCellValue('A1', 'Artikel');
+        $sheet->setCellValue('B1', 'Barcode');
+        $sheet->setCellValue('C1', 'Bezeichnung');
+        $sheet->setCellValue('C1', 'Bezeichnung');
+        $sheet->setCellValue('D1', 'Einsatzbereich');
+        $sheet->setCellValue('E1', 'Position');
+        $sheet->setCellValue('F1', 'Kategorie');
+        $sheet->setCellValue('G1', 'Status');
+
+        $items = Item::all();
+
+        $exportFileName = "barcode_export.xlsx";
+
+        $index = 2;
+        foreach ($items as $item){
+            $sheet->setCellValue('A' . $index, $item->name);
+            $sheet->setCellValue('B'  . $index, $item->barcode);
+            $sheet->setCellValue('C' . $index, $item->description);
+
+            $sheet->setCellValue('D' . $index, $item->room);
+            $sheet->setCellValue('E' . $index, 'unknown');
+            $sheet->setCellValue('F' . $index, $item->type);
+            $sheet->setCellValue('G' . $index, $item->status);
+            $index++;
+        }
+
+        $writer = new Xlsx($spreadsheet);
+
+
+        unlink($exportFileName);
+        $writer->save($exportFileName);
 
     }
 }

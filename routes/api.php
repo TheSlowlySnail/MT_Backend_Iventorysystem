@@ -96,3 +96,4 @@ Route::group(['middleware' => 'auth:api'], function(){
 });
 
 Route::get('/test', 'ExcelController@insertItemsInDatabase');
+Route::get('/export', 'ExcelController@exportItemsInXml');
