@@ -32,7 +32,7 @@ class ExcelController extends Controller
     //
     public function insertItemsInDatabase()
     {
-        $inputFileName = public_path() . '\barcode.xlsx';
+        $inputFileName = public_path() . '\table\barcode.xlsx';
         $inputFileType = IOFactory::identify($inputFileName);
 
         $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();

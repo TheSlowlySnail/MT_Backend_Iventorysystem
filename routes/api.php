@@ -89,6 +89,10 @@ Route::post('/store', [
     'uses' => 'uploadController@store'
 ]);
 
+Route::post('/excelimport', [
+    'uses' => 'uploadController@storeExcelTable'
+]);
+
 Route::post('userLogin', 'UserController@userLogin');
 Route::post('userRegister', 'UserController@userRegister');
 Route::group(['middleware' => 'auth:api'], function(){
