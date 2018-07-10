@@ -173,7 +173,7 @@ class ExcelController extends Controller
 
         $items = Item::all();
 
-        $exportFileName = "barcode_export.xlsx";
+        $exportFileName = "table\\barcode_export.xlsx";
 
         $index = 2;
         foreach ($items as $item){
@@ -191,8 +191,15 @@ class ExcelController extends Controller
         $writer = new Xlsx($spreadsheet);
 
 
-        unlink($exportFileName);
+        //unlink($exportFileName);
         $writer->save($exportFileName);
 
+
+
+        //
+        return response()->download(public_path('table\\barcode_export.xlsx'))->deleteFileAfterSend();
+
     }
+
+
 }

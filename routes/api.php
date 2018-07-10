@@ -93,6 +93,11 @@ Route::post('/excelimport', [
     'uses' => 'uploadController@storeExcelTable'
 ]);
 
+Route::get('/excelexport', [
+        'uses' => 'ExcelController@exportItemsInXml'
+    ]
+);
+
 Route::post('userLogin', 'UserController@userLogin');
 Route::post('userRegister', 'UserController@userRegister');
 Route::group(['middleware' => 'auth:api'], function(){
