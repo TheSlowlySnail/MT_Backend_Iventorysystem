@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
 use Auth;
+use Illuminate\Support\Facades\DB;
 use Validator;
 use App\User;
 
@@ -118,8 +119,16 @@ class UserController extends Controller
 
     public function deletePerson($id){
         $user = User::find($id);
-        $user->delete();
-        return response()->json(['message' => 'User Deleted'],200);
+
+
+        if (DB::table('Lending')->where('personid', '=', $user->personid)->count() <= 0) {
+            $user->delete();
+            return response()->json(['message' => 'User Deleted'],200);
+
+        }
+        return response()->json(['message' => 'Open Lending. Cant Delete.'],401);
 
     }
+
+
 }
