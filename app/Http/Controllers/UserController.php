@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
 use Auth;
+use Illuminate\Support\Facades\DB;
 use Validator;
 use App\User;
 
@@ -103,7 +104,7 @@ class UserController extends Controller
     public function putUser(Request $request, $id){
         $user = User::find($id);
         if(!$user){
-            return response()->json(['message'=>'Document not found'], 404);
+            return response()->json(['message'=>'User not found'], 404);
 
         }
         $user->firstname = $request->input('personid');
@@ -111,15 +112,24 @@ class UserController extends Controller
         $user->lastname = $request->input('lastname');
         $user->annotation = $request->input('annotation');
         $user->email = $request->input('email');
-        $user->password =bcrypt( $request->input('password'));
+        $user->role = $request->input('role');
+//        $user->password =bcrypt( $request->input('password'));
         $user->save();
         return response()->json(['user' => $user], 200);
     }
 
     public function deletePerson($id){
         $user = User::find($id);
-        $user->delete();
-        return response()->json(['message' => 'User Deleted'],200);
+
+
+        if (DB::table('Lending')->where('personid', '=', $user->personid)->count() <= 0) {
+            $user->delete();
+            return response()->json(['message' => 'User Deleted'],200);
+
+        }
+        return response()->json(['message' => 'Open Lending. Cant Delete.'],401);
 
     }
+
+
 }
