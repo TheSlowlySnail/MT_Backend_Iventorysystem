@@ -60,6 +60,16 @@ $lend->enddate->addHours(3);
         return response()->json($response,200);
     }
 
+    public function getLendsPerId($id){
+        $lends = DB::table('lending')->join('items', 'lending.itemid', '=', 'items.id' )
+            ->join('users','lending.personid', '=' ,'users.personid')
+            ->select('lending.*', 'items.barcode', 'items.name','users.firstname', 'users.lastname')
+            ->where('lending.id' , '=', $id)
+            ->get();
+        $response = $lends;
+        return response()->json($response,200);
+    }
+
     public function putLend(Request $request, $id){
         $lend = Lend::find($id);
         if(!$lend){
@@ -69,6 +79,7 @@ $lend->enddate->addHours(3);
         $lend->personid = $request->input('personid');
         $lend->startdate = $request->input('startdate');
         $lend->enddate = $request->input('enddate');
+        $lend->annotation = $request->input('annotation');
         $lend->save();
         return response()->json(['lend' => $lend], 200);
     }

@@ -68,6 +68,10 @@ Route::get('/lends',[
     'uses' => 'LendingController@getLends'
 ]);
 
+Route::get('/lend/{id}',[
+    'uses' => 'LendingController@getLendsPerId'
+]);
+
 //Update Command
 Route::put('/lend/{id}', [
     'uses' => 'LendingController@putLend'
