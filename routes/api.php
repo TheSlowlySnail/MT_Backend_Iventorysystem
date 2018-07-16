@@ -36,6 +36,11 @@ Route::get('/item/{id}', [
     ]
 );
 
+
+Route::put('/itemback/{id}', [
+    'uses' => 'InventarController@putItemLendBack'
+]);
+
 //User
 //Route::post('/person', [
 //    'uses' => 'PersonsController@postPerson'

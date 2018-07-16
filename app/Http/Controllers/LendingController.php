@@ -87,7 +87,7 @@ $lend->enddate->addHours(3);
     public function deleteLend($id){
         $lend = Lend::find($id);
         $lend->delete();
-        return response()->json(['message' => 'Deleted'],200);
+        return response()->json(['itemToLend' => $lend->itemid],200);
 
     }
 

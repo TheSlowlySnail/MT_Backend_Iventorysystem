@@ -56,6 +56,19 @@ class InventarController extends Controller
         return response()->json(['item' => $item], 200);
     }
 
+    public function putItemLendBack( $id){
+        $item = Item::find($id);
+        if(!$item){
+            return response()->json(['message'=>'Document not found putItemLendBack: '. $id . '. The number is not the Barcode. Look into the Table'], 400);
+
+        }
+
+        $item->status = 'back';
+
+        $item->save();
+        return response()->json(['item' => $item], 200);
+    }
+
     public function deleteItem($id){
         $item = Item::find($id);
         $item->delete();
